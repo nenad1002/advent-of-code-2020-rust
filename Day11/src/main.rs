@@ -20,14 +20,14 @@ fn part_1_solution(board: &mut Vec<String>) -> i32 {
         [1, 1],
     ];
 
-    let mut boardCopy = vec![];
+    let mut board_copy = vec![];
     let mut res = 0;
     let mut change = false;
 
     for i in 0..board.len() {
         let mut row = "".to_string();
         for j in 0..board[0].len() {
-            let mut countOccupied = 0;
+            let mut count_occupied = 0;
             for k in 0..neigh.len() {
                 //println!("{:?}", board[i].as_bytes()[j] as char);
                 let new_i = i as isize + neigh[k][0];
@@ -42,17 +42,17 @@ fn part_1_solution(board: &mut Vec<String>) -> i32 {
                 let new_i = new_i as usize;
                 let new_j = new_j as usize;
                 if board[new_i].as_bytes()[new_j] as char == '#' {
-                    countOccupied += 1;
+                    count_occupied += 1;
                 }
             }
 
             let c = board[i].as_bytes()[j] as char;
 
-            if c == '#' && countOccupied >= 4 {
+            if c == '#' && count_occupied >= 4 {
                 row.push('L');
                 res += 1;
                 change = true;
-            } else if c == 'L' && countOccupied == 0 {
+            } else if c == 'L' && count_occupied == 0 {
                 row.push('#');
                 change = true;
             } else {
@@ -62,12 +62,12 @@ fn part_1_solution(board: &mut Vec<String>) -> i32 {
                 row.push(c);
             }
         }
-        boardCopy.push(row.clone());
+        board_copy.push(row.clone());
         row.clear();
     }
 
     if change {
-        return part_1_solution(&mut boardCopy);
+        return part_1_solution(&mut board_copy);
     }
 
     res
@@ -85,14 +85,14 @@ fn part_2_solution(board: &mut Vec<String>) -> i32 {
         [1, 1],
     ];
 
-    let mut boardCopy = vec![];
+    let mut board_copy = vec![];
     let mut res = 0;
     let mut change = false;
 
     for i in 0..board.len() {
         let mut row = "".to_string();
         for j in 0..board[0].len() {
-            let mut countOccupied = 0;
+            let mut count_occupied = 0;
             for k in 0..neigh.len() {
                 //println!("{:?}", board[i].as_bytes()[j] as char);
                 let mut new_i = i as isize + neigh[k][0];
@@ -106,7 +106,7 @@ fn part_2_solution(board: &mut Vec<String>) -> i32 {
                     let c = board[new_i as usize].as_bytes()[new_j as usize] as char;
                     if c == '#' || c == 'L' {
                         if c == '#' {
-                            countOccupied += 1;
+                            count_occupied += 1;
                         }
                         break;
                     }
@@ -117,11 +117,11 @@ fn part_2_solution(board: &mut Vec<String>) -> i32 {
 
             let c = board[i].as_bytes()[j] as char;
 
-            if c == '#' && countOccupied >= 5 {
+            if c == '#' && count_occupied >= 5 {
                 row.push('L');
                 res += 1;
                 change = true;
-            } else if c == 'L' && countOccupied == 0 {
+            } else if c == 'L' && count_occupied == 0 {
                 row.push('#');
                 change = true;
             } else {
@@ -131,12 +131,12 @@ fn part_2_solution(board: &mut Vec<String>) -> i32 {
                 row.push(c);
             }
         }
-        boardCopy.push(row.clone());
+        board_copy.push(row.clone());
         row.clear();
     }
 
     if change {
-        return part_2_solution(&mut boardCopy);
+        return part_2_solution(&mut board_copy);
     }
 
     res
